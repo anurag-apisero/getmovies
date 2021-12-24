@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="getmovies-test-suite.xml" />
+	<munit:test name="getmovies-test-suite-getmovies-mainTest" doc:id="03bb3390-56d3-4941-ad03-f5357cd77513" description="Test" expectedErrorType="ANY">
+		<munit:behavior>
+			<munit:set-event doc:name="Set Event" doc:id="d61d1d7b-a2bd-4482-be13-9bbf96324703" >
+				<munit:attributes value='#[{uriParams:{"movie":"Uri"}}]' />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getmovies-main" doc:id="7118a20b-b2ae-4243-982d-07159980ff3d" name="getmovies-main"/>
+		</munit:execution>
+		<munit:validation >
+			<logger level="INFO" doc:name="Logger" doc:id="e05e2a81-76b4-4639-821d-cd409966ed34" />
+			<munit-tools:assert-that doc:name="Assert that" doc:id="414c3fa2-fcee-4e73-a794-4140874567d5" expression="#[payload]" is="#[MunitTools::notNullValue()]" message="Payload is null"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getmovies-test-suite-get:\movies\(movie):getmovies-configTest" doc:id="a9bf96ff-8d3b-4e2b-93ef-b69684dc21ca" description="Test">
+		<munit:behavior >
+			<munit:set-event doc:name="Set Event" doc:id="3d4c4baf-fefa-4b86-a1a3-4e6c354c6a1a" >
+				<munit:attributes value="#[{uriParams:{movie:'Uri'}}]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\movies\(movie):getmovies-config" doc:id="89f21245-78d5-4c55-a695-3caa10e65aa6" name="get:\movies\(movie):getmovies-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="b63ea185-02f5-4a2d-a8cc-6c7702489ea2" message="Payload is null" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getmovies-test-suite-get:\movies:getmovies-configTest" doc:id="749ee8b7-18fb-4de2-b770-28fa4ef2af92" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\movies:getmovies-config" doc:id="c462fbe2-8d61-4dd0-99d6-a9f5746e06fd" name="get:\movies:getmovies-config"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="a31a9f48-3f83-48e2-bbae-fea501248705" message="payload is null" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getmovies-test-suite-getmovies-consoleTest" doc:id="7ed505e8-216b-45b8-a5ea-8a72938e5830" description="Test">
+		<munit:behavior >
+			<munit:set-event doc:name="Set Event" doc:id="eef031fa-b44e-464e-a0fd-26e6d6826608" >
+				<munit:attributes value="#[{uriParams:{movie:'Uri'}}]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getmovies-console" doc:id="f3103586-4d1c-416a-b699-ee852e8ee8b1" name="getmovies-console"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="d4324c74-e12b-4c18-ac0e-49cd4c84c17d" message="payload is null" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getmovies-test-suite-getmovies-mainTest1" doc:id="c100b0db-b98b-4365-a7a1-8a8fa408d771" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getmovies-main" doc:id="3632b05b-70a1-43bf-aa87-fce0708daa3e" name="getmovies-main"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="59de598f-a118-490a-b21a-6f83bb570fbb" message="movie does not exist" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>

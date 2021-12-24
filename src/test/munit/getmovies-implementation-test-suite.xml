@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="getmovies-implementation-test-suite.xml" />
+	<munit:test name="getmovies-implementation-test-suite-getmovies-implementationFlowTest" doc:id="640def04-49a5-4911-8774-e2db9488c91d" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getmovies-implementationFlow" doc:id="58f2ee1b-5bb6-4c7d-9aee-723f88b4c626" name="getmovies-implementationFlow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="231cf80e-c7c8-4b5b-b43c-03095964336f" message="Payload is null" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="getmovies-implementation-test-suite-getmovies-implementationFlow1Test" doc:id="9bf5c821-0e37-4e1f-a1cb-16fe1c70fd96" description="Test">
+		<munit:behavior >
+			<munit:set-event doc:name="Set Event" doc:id="33b13bc7-e681-4e56-84f3-640da8bc8258">
+				<munit:attributes value="#[{uriParams:{movie:'Uri'}}]" />
+			</munit:set-event>
+		</munit:behavior>
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to getmovies-implementationFlow1" doc:id="0c14ca25-b472-48b4-b6ac-775de9baa6ea" name="getmovies-implementationFlow1"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="ef209b1d-0d9b-4b82-8684-c25070288f5e" is="#[MunitTools::notNullValue()]" message="Payload is null" expression="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
